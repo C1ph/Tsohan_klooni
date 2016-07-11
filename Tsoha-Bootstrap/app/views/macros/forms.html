@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+</html>
+
+{% macro destroy_button() %}
+  <form method="post" action="{{base_path}}/race/{{race.id}}/destroy" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista</button>
+  </form>
+{% endmacro %}
+
+{% macro destroy_button(action, text) %}
+  <form method="post" action="{{action}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
+  </form>
+{% endmacro %}
+
+{% import "macros/forms.html" as forms %}
+<h1>{{race.name}}</h1>
+<p>
+  {{forms.destroy_button()}}
+  <a href="{{base_path}}/race/{{race.id}}/edit" class="btn btn-default">Muokkaa</a>
+</p>
+
+<ul>
+  <li><strong>Lisätty tietokantaan:</strong> {{race.published}}</li>
+  <li><strong>Julkaisija:</strong> {{race.publisher}}</li>
+  <li><strong>Status:</strong>
+    {% if race.exists %}
+      <label class="label label-success">rekisteröity</label>
+    {% else %}
+      <label class="label label-danger">ei rekisteröity</label>
+    {% endif %}
+  </li>
+  <li><strong>Lisäyspäivä:</strong> {{race.added}}</li>
+</ul>
+
+<p>
+  {{race.description}}
+</p>
+

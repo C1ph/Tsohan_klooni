@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Käyttäjät</h1>
+
+  <p>
+    <a href="{{base_path}}/user/new" class="btn btn-success">Lisää käyttäjä</a>
+  </p>
+  
+  <form method="get" action="" class="form-inline">
+    <div class="form group">
+      <input type="text" name="search" class="form-control" placeholder="Hakusana">
+    </div>
+
+    <button type="submit" class="btn btn-default">Hae käyttäjää</button>
+  </form>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th>Admin</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td><a href="{{base_path}}/user/{{user.id}}">{{user.name}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.admin}}</td>
+          <td>
+              {% if user.exists %}
+                <label class="label label-success">Rekisteröity
+              {% else %}
+                <label class="label label-danger">Ei rekisteröity
+              {% endif %}
+          </td>
+          <td>{{user.added}}</td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/user/{{user.id}}/edit">Muokkaa</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

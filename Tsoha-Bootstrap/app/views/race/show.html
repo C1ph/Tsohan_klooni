@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Painikkeet tähän -->
+{% if race != false %}
+<p>
+    <a href="#" class="btn btn-success">Lisää rotu</a> <a href="#" class="btn btn-success">Lisää roturyhmä</a> <a href="{{base_path}}/race/{{race.id}}/edit" class="btn btn-success">Muokkaa</a>
+
+</p>
+<form method="post" action="{{base_path}}/race/{{race.id}}/destroy" style="display: inline-block;">
+    <button type="submit" class="btn btn-danger">Poista rotu</button>
+</form>
+
+<!-- Tiedot tulee listana tähän -->
+<ul>
+    <li><strong>Rotu: </strong>{{race.name}}</li>
+    <li><strong>Numero: </strong>{{race.id}}</li>
+    <li><strong>Kuvaus: </strong>{{race.description}}</li>
+    <li><strong>Alkuperämaa: </strong>{{race.country}}<li>
+    <li><strong>Rekisteröity: </strong>{{race.registered}}<label class="label label-danger"></label></li>
+    <li><strong>Lisäyspäivä: </strong>{{race.published}}</li>
+</ul>
+<!-- Kuvaus tulee tähän -->
+<p>
+    Rodun jälkeen annettu numero ilmaisee kyseisen rodun indeksin tietokannassa.
+</p>
+{% else %}
+<p>
+    Rotua ei löytynyt!
+</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lisää roturyhmä kirjastoon</h1>
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/racegroup">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Numero</label>
+        <input type="text" name="id" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <input type="text" name="description" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
+
+{% for racegroup in racegroups %}
+<tr>
+    <td><a href="{{base_path}}/racegroup/{{racegroup.id}}">{{racegroup.name}}</td>
+    <td>{{racegroup.description}}</td>
+    
+        {% if racegroup.exists %}
+        <label class="label label-success">Rekisteröity
+            {% else %}
+            <label class="label label-danger">Ei rekisteröity
+                {% endif %}
+                </td>
+                <td>{{racegroup.added}}</td>
+                <td><a class="btn btn-default btn-sm" href="{{base_path}}/racegroup/{{racegroup.id}}/edit">Muokkaa</a></td>
+                </tr>
+                {% endfor %}
+
+                {% endblock %}

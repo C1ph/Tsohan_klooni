@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<!-- Painikkeet tähän -->
+<form method="post" action="{{base_path}}/race/{{race.id}}/destroy" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger">Poista rotu</button>
+</form>
+{% if race != false %}
+<!-- Tiedot tulee listana tähän -->
+<form method="post" action="{{base_path}}/race/edit">
+    <div class="form-group">
+        <label>Rotu: </label>
+        <input type="text" name="name" class="form-control" value="{{race.name}}">
+    </div>
+
+    <div class="form-group">
+        <label>Numero: </label>
+        <input type="text" name="id" class="form-control" value="{{race.id}}">
+    </div>
+    
+    <div class="form-group">
+        <label>Kuvaus: </label>
+        <textarea name="description" class="form-control" >{{race.description}} </textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Alkuperämaa: </label>
+        <input type="text" name="country" class="form-control" value="{{race.country}}">
+    </div>
+
+    <div class="form-group">
+        <label>Rekisteröity: </label>
+        <textarea name="registered" class="form-control"> {{race.registered}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Lisäyspäivä: </label>
+        <textarea name="published" class="form-control"> {{race.published}}</textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+</form>
+
+{% else %}
+<p>
+    Rotua ei löytynyt!
+</p>
+{% endif %}
+{% endblock %}

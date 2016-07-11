@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lisää uusi käyttäjä</h1>
+  
+    {% if errors %}
+    <div class="alert alert-danger">
+      <ul>
+        {% for error in errors %}
+          <li>{{error}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+  
+  <form method="post" action="{{base_path}}/user">
+    <div class="form-group">
+      <label>Nimi</label>
+      <input type="text" name="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Salasana</label>
+      <input type="text" name="password" class="form-control">
+    </div>
+
+     <div class="form-group">
+      <label>Admin</label>
+      <input type="text" name="admin" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+  </form>
+ 
+  {% for user in users %}
+        <tr>
+          <td><a href="{{base_path}}/user/{{user.id}}">{{user.name}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.admin}}</td>
+          <td>
+              {% if user.exists %}
+                <label class="label label-success">Käyttäjä on jo olemassa
+              {% else %}
+                <label class="label label-danger">Käyttäjää ei ole olemassa
+              {% endif %}
+          </td>
+          <td>{{user.added}}</td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/user/{{user.id}}/edit">Muokkaa</a></td>
+        </tr>
+      {% endfor %}
+  
+{% endblock %}

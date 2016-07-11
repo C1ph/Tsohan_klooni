@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lisää rotu kirjastoon</h1>
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/race">
+    <div class="form-group">
+        <label>Nimi</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Roturyhmä</label>
+        <input type="text" name="ryhma" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Julkaisupäivä</label>
+        <input type="text" name="published" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Rekisteröity</label>
+        <input type="text" name="registered" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Alkuperämaa</label>
+        <input type="text" name="country" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Kuvaus</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+</form>
+
+{% for race in races %}
+<tr>
+    <td><a href="{{base_path}}/race/{{race.id}}">{{race.name}}</td>
+    <td>{{race.published}}</td>
+    <td>{{race.publisher}}</td>
+    <td>
+        {% if race.exists %}
+        <label class="label label-success">Rekisteröity
+            {% else %}
+            <label class="label label-danger">Ei rekisteröity
+                {% endif %}
+                </td>
+                <td>{{race.added}}</td>
+                <td><a class="btn btn-default btn-sm" href="{{base_path}}/race/{{race.id}}/edit">Muokkaa</a></td>
+                </tr>
+                {% endfor %}
+
+                {% endblock %}

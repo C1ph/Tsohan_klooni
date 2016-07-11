@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Tervetuloa Milin koirarotutietokantaan!</h1>
+  <a href="{{base_path}}{{race.id}}/race" class="btn btn-primary">Rodut</a>
+  <a href="{{base_path}}{{racegroup.id}}/racegroup" class="btn btn-primary">Roturyhmät</a>
+  <a href="{{base_path}}{{racegroup.id}}/user" class="btn btn-primary">Käyttäjät</a>
+  <a href="{{base_path}}{{user.id}}/user/new" class="btn btn-primary">Uusi käyttäjä</a>
+  <a href="{{base_path}}{{user.id}}/login" class="btn btn-primary">Kirjaudu sisään</a>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Bootstrap</th>
+        <th>Taulukko</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Hejsan</td>
+        <td>svejsan</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
